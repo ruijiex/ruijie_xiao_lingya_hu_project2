@@ -1,7 +1,7 @@
-import './App.css';
-import Home from './components/Home';
-import Game from './components/Game';
-import Rules from './components/Rules';
+import '../css/App.css';
+import Home from './Home';
+import Game from './Game';
+import Rules from './Rules';
 import { Route, Routes } from 'react-router-dom';
 
 export default function App() {
