@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import '../css/Home.css';
 import { useDispatch } from 'react-redux';
 import changeDifficultyAction from '../actions/changeDifficultyAction';
+
 export default function Home() {
   const dispatch = useDispatch();
   return (

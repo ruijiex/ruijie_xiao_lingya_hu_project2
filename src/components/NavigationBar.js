@@ -1,8 +1,13 @@
 import React from 'react';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import '../css/NavigationBar.css';
 
 export default function NavigationBar() {
+  const { difficulty } = useParams();
+  // if (difficulty === undefined)
+  //   difficulty = 'easy';
+
   return (
     <Navbar bg='light' expand='lg'>
       <Container>
@@ -11,11 +16,7 @@ export default function NavigationBar() {
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto'>
             <Nav.Link href='/'>Home</Nav.Link>
-            <NavDropdown title='Game' id='basic-nav-dropdown'>
-              <NavDropdown.Item href='/game/easy'>Easy</NavDropdown.Item>
-              <NavDropdown.Item href='/game/medium'>Medium</NavDropdown.Item>
-              <NavDropdown.Item href='/game/hard'>Hard</NavDropdown.Item>
-            </NavDropdown>
+            <Nav.Link href={'/game/' + difficulty}>Game</Nav.Link>
             <Nav.Link href='/rules'>Rules</Nav.Link>
           </Nav>
         </Navbar.Collapse>
