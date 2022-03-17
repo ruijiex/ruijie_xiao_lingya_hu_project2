@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import changeDifficultyAction from '../actions/changeDifficultyAction';
 
 export default function Game() {
-  const { difficulty } = useParams();
   const dispatch = useDispatch();
+  const { difficulty } = useParams();
   const stateDifficulty = useSelector((state) => state.changeDifficulty);
   if (stateDifficulty !== difficulty) {
     dispatch(changeDifficultyAction(difficulty));
