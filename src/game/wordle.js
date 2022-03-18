@@ -26,6 +26,11 @@ class Wordle {
     this.generateSecret();
   }
 
+  changeDifficulty(difficulty) {
+    this.difficulty = difficulty;
+    this.generateSecret();
+  }
+
   generateSecret() {
     const words = this.library.get(this.difficulty);
     this.secret = words[Math.floor(Math.random() * words.length)];
