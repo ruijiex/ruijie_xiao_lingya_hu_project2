@@ -1,6 +1,4 @@
-const fs = require("fs");
-
-const WORD_LIBRARY = "./library.txt";
+// const WORD_LIBRARY = "./library.txt";
 
 class Wordle {
   library = new Map();  // library: Map { k:Array }, k is word length
@@ -11,7 +9,24 @@ class Wordle {
 
   constructor(difficulty) {
     if (difficulty !== undefined) this.difficulty = difficulty;  // difficulty: word length { easy:5, medium:6, hard:7 }
-    const words = fs.readFileSync(WORD_LIBRARY).toString().split('\n');
+
+    // function getWords(url) {
+    //   return fetch(url)
+    //     .then(res => res.text())
+    //     .then(text => Promise.resolve(text));
+    // }
+
+    const words = [
+      "AAAAA", "BBBBB", "CCCCC",
+      "DDDDDD", "EEEEEEE", "FFFFFF",
+      "GGGGGGG", "HHHHHHH", "IIIIIII", "JJJJJJJ", "KKKKKKK"
+    ];
+    // const urls = [WORD_LIBRARY];
+    // Promise.all(urls.map(getWords))
+    //   .then(text => {
+    //     for (const word of text.toString().split('\n'))
+    //       words.push(word);
+    //   });
 
     for (const word of words) {
       const k = word.length;
@@ -36,8 +51,12 @@ class Wordle {
     this.secret = words[Math.floor(Math.random() * words.length)];
   }
 
+  getSecret() {
+    return this.secret;
+  }
+
   guess(word) {
-    if (word.length != this.difficulty) return [];
+    if (word.length !== this.difficulty) return [];
 
     const maps = new Map();  // secret frequency map
     for (const char of this.secret) {
