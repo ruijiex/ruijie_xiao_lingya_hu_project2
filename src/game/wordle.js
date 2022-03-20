@@ -17,9 +17,9 @@ class Wordle {
     // }
 
     const words = [
-      "AAAAA", "BBBBB", "CCCCC",
-      "DDDDDD", "EEEEEEE", "FFFFFF",
-      "GGGGGGG", "HHHHHHH", "IIIIIII", "JJJJJJJ", "KKKKKKK"
+      "Apple", "Beach", "Cream", "Dance", "Earth", "Fruit", "Glass", "Hotel", "Index", "Level", "Music", "North", "Offer",
+      "Bottle", "Castle", "Circle", "Decide", "Define", "Dinner", "Editor", "Equity", "Figure", "Gender", "Import", "Legacy",
+      "Academy", "Airline", "Balance", "Because", "Capital", "Deliver", "Element", "Fortune", "Healthy", "Insight", "Million"
     ];
     // const urls = [WORD_LIBRARY];
     // Promise.all(urls.map(getWords))

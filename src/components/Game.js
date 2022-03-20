@@ -41,7 +41,6 @@ export default function Game() {
 
   const [showInvalidLengthMsg, setShowInvalidLengthMsg] = useState(false);
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
-  // TODO: Hard code words library, 10 words each difficulty.
 
   const handleSubmit = (e) => {
     e.preventDefault();
