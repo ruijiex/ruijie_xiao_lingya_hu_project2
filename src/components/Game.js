@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
+import { Alert } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import changeDifficultyAction from '../actions/changeDifficultyAction';
 import NavigationBar from './NavigationBar';
 import Wordle from '../game/wordle';
 import WordCard from './WordCard';
-import { Alert } from 'react-bootstrap';
 
 export default function Game() {
   const dispatch = useDispatch();
@@ -21,18 +21,28 @@ export default function Game() {
     ['medium', 6],
     ['hard', 7],
   ]);
-  const level = difficultyMap.has(difficulty)
-    ? difficultyMap.get(difficulty)
+  const level = difficultyMap.has(difficulty.toLowerCase())
+    ? difficultyMap.get(difficulty.toLowerCase())
     : 5;
 
-  const [wordle, setWordle] = useState(new Wordle(level));
+  const attemptsMap = new Map([
+    ['easy', 7],
+    ['medium', 6],
+    ['hard', 5],
+  ]);
+  const allowance = attemptsMap.has(difficulty.toLowerCase())
+    ? attemptsMap.get(difficulty.toLowerCase())
+    : 7;
+
+  const [wordle] = useState(new Wordle(level));
   const [inputWord, setInputWord] = useState('');
   const [guessedWords, setGuessedWords] = useState([]);
+  const [attempts, setAttempts] = useState(allowance);
+
   const [showInvalidLengthMsg, setShowInvalidLengthMsg] = useState(false);
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   // TODO: Hard code words library, 10 words each difficulty.
-  // TODO: add attempts map
-  const [attempts, setAttempts] = useState(level);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputWord.length !== level) {
