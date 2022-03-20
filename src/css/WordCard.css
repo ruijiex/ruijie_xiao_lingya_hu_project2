@@ -1,0 +1,16 @@
+.guess-attempt {
+  list-style-type: none;
+  text-align: center;
+}
+
+.color-hint-0 {
+  background-color: grey;
+}
+
+.color-hint-1 {
+  background-color: yellow;
+}
+
+.color-hint-2 {
+  background-color: green;
+}
