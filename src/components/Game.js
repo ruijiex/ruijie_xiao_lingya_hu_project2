@@ -20,11 +20,10 @@ export default function Game() {
     ['hard', 7],
   ]);
   const level = difficultyMap.has(difficulty)
-    ? difficultyMap.get(difficulty) : 5;
+    ? difficultyMap.get(difficulty)
+    : 5;
 
-  const wordle = new Wordle(level);
-  const secret = wordle.getSecret();
-
+  const [wordle, setWordle] = useState(new Wordle(level));
   const [inputWord, setInputWord] = useState('');
   const [guessedWords, setGuessedWords] = useState([]);
   const handleSubmit = (e) => {
@@ -39,12 +38,15 @@ export default function Game() {
       <NavigationBar />
       <h1>Game</h1>
       <p>current state difficulty: {stateDifficulty}</p>
-      <p>Current secret: {secret}</p>
+      <p>Current secret: {wordle.getSecret()}</p>
       <form onSubmit={handleSubmit}>
         {/* TODO 
         Set number of input from difficulty
         */}
         <input
+          size={level}
+          minLength={level}
+          maxLength={level}
           type='text'
           required
           value={inputWord}
@@ -56,7 +58,11 @@ export default function Game() {
         {guessedWords.map((value, index) => {
           // TODO
           // return letter state
-          return <li key={index}>{value} {wordle.guess(value)}</li>;
+          return (
+            <li key={index}>
+              {value} {wordle.guess(value)}
+            </li>
+          );
         })}
       </ul>
     </div>
