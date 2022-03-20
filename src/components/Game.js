@@ -41,7 +41,6 @@ export default function Game() {
 
   const [showInvalidLengthMsg, setShowInvalidLengthMsg] = useState(false);
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
-  const [showReset, setShowReset] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +52,6 @@ export default function Game() {
     }
     if (inputWord.toUpperCase() === wordle.getSecret()) {
       setShowSuccessMsg(true);
-      setShowReset(false);
     }
     setInputWord('');
   };
@@ -62,9 +60,9 @@ export default function Game() {
     e.preventDefault();
     wordle.generateSecret();
     setAttempts(allowance);
+    setShowSuccessMsg(false);
     setGuessedWords([]);
     setInputWord('');
-    setShowReset(true);
   };
 
   return (
@@ -116,14 +114,12 @@ export default function Game() {
           );
         })}
       </ul>
-      {showReset && (
-        <button
-        name="reset"
-        onClick={handleReset}
-      >
-        Reset
-      </button>
-      )}
+      <button
+      name="reset"
+      onClick={handleReset}
+    >
+      Reset
+    </button>
     </div>
   );
 }
