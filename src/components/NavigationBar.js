@@ -12,10 +12,14 @@ export default function NavigationBar() {
         <Navbar.Brand href='/'>Wordle</Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='me-auto'>
+          <Nav className='me-auto' defaultActiveKey='/'>
             <Nav.Link href='/'>Home</Nav.Link>
-            <Nav.Link href={'/game/' + stateDifficulty}>Game</Nav.Link>
-            <Nav.Link href='/rules'>Rules</Nav.Link>
+            <Nav.Link eventKey='game' href={'/game/' + stateDifficulty}>
+              Game
+            </Nav.Link>
+            <Nav.Link eventKey='rules' href='/rules'>
+              Rules
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

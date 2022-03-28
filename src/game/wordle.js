@@ -1,40 +1,58 @@
-// const WORD_LIBRARY = "./library.txt";
-
-class Wordle {
-  library = new Map();  // library: Map { k:Array }, k is word length
+export default class Wordle {
+  library = new Map(); // library: Map { k:Array }, k is word length
   difficulties = new Set([5, 6, 7]);
 
   difficulty = 5;
-  secret = "";
+  secret = '';
 
   constructor(difficulty) {
-    if (difficulty !== undefined) this.difficulty = difficulty;  // difficulty: word length { easy:5, medium:6, hard:7 }
-
-    // function getWords(url) {
-    //   return fetch(url)
-    //     .then(res => res.text())
-    //     .then(text => Promise.resolve(text));
-    // }
+    if (difficulty !== undefined) this.difficulty = difficulty; // difficulty: word length { easy:5, medium:6, hard:7 }
 
     const words = [
-      "Apple", "Beach", "Cream", "Dance", "Earth", "Fruit", "Glass", "Hotel", "Index", "Level", "Music", "North", "Offer",
-      "Bottle", "Castle", "Circle", "Decide", "Define", "Dinner", "Editor", "Equity", "Figure", "Gender", "Import", "Legacy",
-      "Academy", "Airline", "Balance", "Because", "Capital", "Deliver", "Element", "Fortune", "Healthy", "Insight", "Million"
+      'Apple',
+      'Beach',
+      'Cream',
+      'Dance',
+      'Earth',
+      'Fruit',
+      'Glass',
+      'Hotel',
+      'Index',
+      'Level',
+      'Music',
+      'North',
+      'Offer',
+      'Bottle',
+      'Castle',
+      'Circle',
+      'Decide',
+      'Define',
+      'Dinner',
+      'Editor',
+      'Equity',
+      'Figure',
+      'Gender',
+      'Import',
+      'Legacy',
+      'Academy',
+      'Airline',
+      'Balance',
+      'Because',
+      'Capital',
+      'Deliver',
+      'Element',
+      'Fortune',
+      'Healthy',
+      'Insight',
+      'Million',
     ];
-    // const urls = [WORD_LIBRARY];
-    // Promise.all(urls.map(getWords))
-    //   .then(text => {
-    //     for (const word of text.toString().split('\n'))
-    //       words.push(word);
-    //   });
 
     for (const word of words) {
       const k = word.length;
       if (this.difficulties.has(k)) {
-        if (!this.library.has(k))
-        this.library.set(k, []);
+        if (!this.library.has(k)) this.library.set(k, []);
 
-      this.library.get(k).push(word.toUpperCase());
+        this.library.get(k).push(word.toUpperCase());
       }
     }
 
@@ -58,22 +76,21 @@ class Wordle {
   guess(word) {
     if (word.length !== this.difficulty) return [];
 
-    const maps = new Map();  // secret frequency map
+    const maps = new Map(); // secret frequency map
     for (const char of this.secret) {
-      if (!maps.has(char))
-        maps.set(char, 0);
+      if (!maps.has(char)) maps.set(char, 0);
       maps.set(char, maps.get(char) + 1);
     }
 
     // color check has priority: need two trivial loops - check 2 before 1, case: secret = "aba", guess = "aaa"
-    const colors = Array(this.difficulty).fill(0);  // 2: char and pos match, 1: char exists but pos doesn't
+    const colors = Array(this.difficulty).fill(0); // 2: char and pos match, 1: char exists but pos doesn't
 
     for (let i = 0; i < this.difficulty; i++) {
       const char = word[i].toUpperCase();
 
       if (char === this.secret[i]) {
         if (maps.get(char) > 0) {
-          colors[i] = 2;  // found a match: push green
+          colors[i] = 2; // found a match: push green
 
           maps.set(char, maps.get(char) - 1);
         }
@@ -85,7 +102,7 @@ class Wordle {
 
       if (char !== this.secret[i]) {
         if (maps.get(char) > 0) {
-          colors[i] = 1;  // the char exists in the secret, but pos doesn't match: scan left to right
+          colors[i] = 1; // the char exists in the secret, but pos doesn't match: scan left to right
 
           maps.set(char, maps.get(char) - 1);
         }
@@ -95,5 +112,3 @@ class Wordle {
     return colors;
   }
 }
-
-module.exports = Wordle;

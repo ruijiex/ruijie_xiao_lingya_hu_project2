@@ -56,7 +56,7 @@ export default function Game() {
     setInputWord('');
   };
 
-  const handleReset = e => {
+  const handleReset = (e) => {
     e.preventDefault();
     wordle.generateSecret();
     setAttempts(allowance);
@@ -89,7 +89,6 @@ export default function Game() {
       )}
       <h1>Game</h1>
       <p>current state difficulty: {stateDifficulty}</p>
-      <p>Current secret: {wordle.getSecret()}</p>
       {attempts === 0 ? (
         <h2>Game over</h2>
       ) : (
@@ -114,12 +113,9 @@ export default function Game() {
           );
         })}
       </ul>
-      <button
-      name="reset"
-      onClick={handleReset}
-    >
-      Reset
-    </button>
+      <button name='reset' onClick={handleReset}>
+        Reset
+      </button>
     </div>
   );
 }
