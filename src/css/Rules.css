@@ -1,0 +1,16 @@
+.rules-title {
+  align-items: center;
+  text-align: center;
+}
+
+.rules-difficulty {
+  margin-left: 20px;
+  align-items: left;
+  text-align: left;
+}
+
+.rules-clues {
+  margin-left: 20px;
+  align-items: left;
+  text-align: left;
+}
