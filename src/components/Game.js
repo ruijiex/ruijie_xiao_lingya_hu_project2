@@ -83,19 +83,16 @@ export default function Game() {
           onClose={() => setShowInvalidLengthMsg(false)}
         >
           <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-          <p>
-            The length of the word you input is too short or too long. Input
-            again!
-          </p>
+          <p>The length of the word you input is too short or too long. Input again!</p>
         </Alert>
       )}
       <h1>Game</h1>
       <p>
-        Current state difficulty:{' '}
+        Current State Difficulty: {' '}
         {stateDifficulty.charAt(0).toUpperCase() + stateDifficulty.slice(1)}
       </p>
-      <p>The length of secret word: {level}</p>
-      <h5>Attempts:{attempts}</h5>
+      <p>Secret Word Length: {level}</p>
+      <h5>Attempts Allowance: {attempts}</h5>
       <div className='game-content'>
         {attempts === 0 ? (
           <h2>Game over</h2>
