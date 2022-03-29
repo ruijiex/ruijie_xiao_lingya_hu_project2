@@ -1,16 +1,26 @@
 .guess-attempt {
+  font-size: 36px;
   list-style-type: none;
   text-align: center;
+  line-height: 56px;
+  padding: 0;
+  margin: 0;
+}
+li span {
+  margin: 0 5px 5px 0;
+  padding: 0 10px;
+  line-height: 0px;
 }
 
 .color-hint-0 {
-  background-color: grey;
+  background-color: #adb5bd;
 }
 
 .color-hint-1 {
-  background-color: yellow;
+  background-color: #f5cb5c;
 }
 
 .color-hint-2 {
-  background-color: green;
+  color: white;
+  background-color: #718355;
 }

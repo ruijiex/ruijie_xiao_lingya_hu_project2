@@ -1,16 +1,23 @@
+.rules-body {
+  width: 80%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .rules-title {
   align-items: center;
   text-align: center;
 }
 
 .rules-difficulty {
-  margin-left: 20px;
-  align-items: left;
+  align-items: right;
   text-align: left;
+  list-style-type: circle;
 }
 
 .rules-clues {
-  margin-left: 20px;
   align-items: left;
   text-align: left;
+  list-style-type: square;
 }

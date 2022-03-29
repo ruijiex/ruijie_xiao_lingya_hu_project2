@@ -4,9 +4,12 @@ import { Alert } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import changeDifficultyAction from '../actions/changeDifficultyAction';
-import NavigationBar from './NavigationBar';
 import Wordle from '../game/wordle';
 import WordCard from './WordCard';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import '../css/Game.css';
 
 export default function Game() {
   const dispatch = useDispatch();
@@ -66,8 +69,7 @@ export default function Game() {
   };
 
   return (
-    <div>
-      <NavigationBar />
+    <div className='game-body'>
       {showSuccessMsg && (
         <Alert variant='success'>
           <Alert.Heading>Congratulations!</Alert.Heading>
@@ -88,34 +90,50 @@ export default function Game() {
         </Alert>
       )}
       <h1>Game</h1>
-      <p>current state difficulty: {stateDifficulty}</p>
-      {attempts === 0 ? (
-        <h2>Game over</h2>
-      ) : (
-        !showSuccessMsg && (
-          <form onSubmit={handleSubmit}>
-            <input
-              type='text'
-              required
-              value={inputWord}
-              onChange={(e) => setInputWord(e.target.value)}
-            ></input>
-            <button type='submit'>Click to submit</button>
-          </form>
-        )
-      )}
-
-      <p>Attempts:{attempts}</p>
-      <ul>
+      <p>
+        Current state difficulty:{' '}
+        {stateDifficulty.charAt(0).toUpperCase() + stateDifficulty.slice(1)}
+      </p>
+      <p>The length of secret word: {level}</p>
+      <h5>Attempts:{attempts}</h5>
+      <div className='game-content'>
+        {attempts === 0 ? (
+          <h2>Game over</h2>
+        ) : (
+          !showSuccessMsg && (
+            <Form onSubmit={handleSubmit}>
+              <Form.Group role='form'>
+                <InputGroup className='mb-3'>
+                  <Form.Control
+                    required
+                    type='text'
+                    className='form-control'
+                    value={inputWord}
+                    onChange={(e) => setInputWord(e.target.value)}
+                  />
+                  <Button type='submit' variant='outline-dark'>
+                    Send
+                  </Button>
+                </InputGroup>
+              </Form.Group>
+            </Form>
+          )
+        )}
+      </div>
+      <ul className='guessed-words'>
         {guessedWords.map((value, index) => {
           return (
-            <WordCard guessedWord={value} guessState={wordle.guess(value)} />
+            <WordCard
+              key={index}
+              guessedWord={value}
+              guessState={wordle.guess(value)}
+            />
           );
         })}
       </ul>
-      <button name='reset' onClick={handleReset}>
+      <Button name='reset' onClick={handleReset} variant='outline-dark'>
         Reset
-      </button>
+      </Button>
     </div>
   );
 }
