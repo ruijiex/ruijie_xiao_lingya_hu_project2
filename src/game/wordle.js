@@ -1,3 +1,5 @@
+const words = require('./words.json');
+
 export default class Wordle {
   library = new Map(); // library: Map { k:Array }, k is word length
   difficulties = new Set([5, 6, 7]);
@@ -8,53 +10,8 @@ export default class Wordle {
   constructor(difficulty) {
     if (difficulty !== undefined) this.difficulty = difficulty; // difficulty: word length { easy:5, medium:6, hard:7 }
 
-    const words = [
-      'Apple',
-      'Beach',
-      'Cream',
-      'Dance',
-      'Earth',
-      'Fruit',
-      'Glass',
-      'Hotel',
-      'Index',
-      'Level',
-      'Music',
-      'North',
-      'Offer',
-      'Bottle',
-      'Castle',
-      'Circle',
-      'Decide',
-      'Define',
-      'Dinner',
-      'Editor',
-      'Equity',
-      'Figure',
-      'Gender',
-      'Import',
-      'Legacy',
-      'Academy',
-      'Airline',
-      'Balance',
-      'Because',
-      'Capital',
-      'Deliver',
-      'Element',
-      'Fortune',
-      'Healthy',
-      'Insight',
-      'Million',
-    ];
-
-    for (const word of words) {
-      const k = word.length;
-      if (this.difficulties.has(k)) {
-        if (!this.library.has(k)) this.library.set(k, []);
-
-        this.library.get(k).push(word.toUpperCase());
-      }
-    }
+    for (const [k, v] of Object.entries(words))
+      this.library.set(parseInt(k), v.map(word => word.toUpperCase()));
 
     this.generateSecret();
   }
